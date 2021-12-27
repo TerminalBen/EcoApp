@@ -4,6 +4,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,14 +14,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.eco_app.databinding.ActivityMapsBinding;
+import com.google.android.material.appbar.AppBarLayout;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
-
+    private Toolbar mtoolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +32,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //setContentView(binding.getRoot());
         setContentView(R.layout.activity_maps);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-
+        mtoolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(mtoolbar);
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -37,6 +41,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+         super.onCreateOptionsMenu(menu);
+         getMenuInflater().inflate(R.menu.main_menu,menu);
+         return true;
     }
 
     /**
