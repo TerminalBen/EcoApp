@@ -3,4 +3,23 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="add_icon_fab">add icon Fab</string>
     <string name="filter_icon_fab">Filter icon Fab</string>
+    <string name="title_activity_add">addActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="speciesName">Nome da Espécie</string>
+    <string name="speciesLink">Link da Espécie(opcional)</string>
+    <string name="camera_button">camera_button</string>
+    <string name="speciesPicture">picture</string>
+    <string name="speciesNameDatabase">speciesName(Fetch DB)</string>
+    <string name="date">Date:</string>
+    <string name="date_of_registry">Date of registry(Fetch DB)</string>
+    <string name="location">Loc. Geografica</string>
+    <string name="lat_long">Latitude | Longitude</string>
+    <string name="view_Activity">speciesView(debug)</string>
 </resources>

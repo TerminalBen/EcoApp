@@ -1,10 +1,11 @@
 package com.example.eco_app;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,9 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.eco_app.databinding.ActivityMapsBinding;
-import com.google.android.material.appbar.AppBarLayout;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -72,4 +71,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+    public void lauchAddActivity(View view) {
+        Intent intent = new Intent(MapsActivity.this,AddNew.class);
+        startActivity(intent);
+    }
+
+    public void launchRecordActivity(MenuItem item) {
+        Intent intent = new Intent(MapsActivity.this,viewRecord.class);
+        startActivity(intent);
+    }
 }

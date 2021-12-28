@@ -10,4 +10,6 @@
         app:showAsAction="always" />
     <item android:title="settings" />
     <item android:title="Logout" />
+    <item android:title="@string/view_Activity"
+        android:onClick="launchRecordActivity"/>
 </menu>

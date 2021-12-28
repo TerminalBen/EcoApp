@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddNew">
+
+    <include
+        android:id="@+id/toolbar_add"
+        layout="@layout/toolbar"
+        android:backgroundTint="#FF8800" />
+
+    <ImageView
+        android:id="@+id/camera_button"
+        android:layout_width="203dp"
+        android:layout_height="196dp"
+        android:contentDescription="@string/camera_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add"
+        app:layout_constraintVertical_bias="0.108"
+        app:srcCompat="@drawable/ic_camera" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="285dp"
+        android:layout_height="88dp"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_button"
+        app:layout_constraintVertical_bias="0.54">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="285dp"
+        android:layout_height="88dp"
+        android:layout_marginBottom="188dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/camera_button"
+        app:layout_constraintVertical_bias="0.932">
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/save_button"
+        android:layout_width="63dp"
+        android:layout_height="58dp"
+        android:contentDescription="save_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintVertical_bias="0.431"
+        app:srcCompat="@drawable/ic_submit" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/speciesLink"
+        android:layout_width="257dp"
+        android:layout_height="65dp"
+        android:hint="@string/speciesLink"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout2" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/speciesName"
+        android:layout_width="257dp"
+        android:layout_height="65dp"
+        android:hint="@string/speciesName"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

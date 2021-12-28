@@ -30,6 +30,7 @@
             android:src="@drawable/ic_add"
             android:layout_margin="20dp"
             android:contentDescription="@string/add_icon_fab"
+            android:onClick="lauchAddActivity"
             android:backgroundTint="@android:color/holo_orange_dark" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
