@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.145703125" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout-w936dp/activity_login.xml" value="0.190625" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/activity_add_new.xml" value="0.264" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/activity_eccoapp.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/activity_login2.xml" value="0.264" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/activity_view_record.xml" value="0.13020833333333334" />
+        <entry key="..\:/Users/rfior/OneDrive/Desktop/quarto ano/Program em dispositiovs moveis/EcoApp/app/src/main/res/layout/toolbar.xml" value="0.2" />
         <entry key="app/src/main/res/drawable-anydpi/ic_add.xml" value="0.28489583333333335" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.371875" />
@@ -19,7 +28,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+
+    <ImageButton
+        android:id="@+id/back2"
+        android:layout_width="76dp"
+        android:layout_height="56dp"
+        android:onClick="goback"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        app:srcCompat="?attr/actionModeCloseDrawable" />
+
+    <Button
+        android:id="@+id/bsignup"
+        android:layout_width="219dp"
+        android:layout_height="65dp"
+        android:backgroundTint="#DF483D"
+        android:onClick="goToApp"
+        android:text="Sign Up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.924"
+        app:rippleColor="#7C7777" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="342dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="User Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.393" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="342dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.515" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="342dp"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.638" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="186dp"
+        android:layout_height="37dp"
+        android:text="Already Have an Account?"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.731" />
+
+    <Button
+        android:id="@+id/loginbutton"
+        android:layout_width="92dp"
+        android:layout_height="30dp"
+        android:backgroundTint="#777171"
+        android:onClick="login"
+        android:text="Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.777"
+        tools:textSize="8sp" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="233dp"
+        android:layout_height="145dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.165"
+        app:srcCompat="@mipmap/signup" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
