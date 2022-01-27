@@ -10,49 +10,50 @@
         android:id="@+id/blogin"
         android:layout_width="219dp"
         android:layout_height="65dp"
-        android:backgroundTint="#0591AE"
-        android:text="Login"
+        android:backgroundTint="#4CAF50"
         android:onClick="goToApp"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.885"
-        app:rippleColor="#7C7777" />
+        app:layout_constraintVertical_bias="0.824"
+        app:rippleColor="#7C7777"
+        tools:ignore="UsingOnClickInXml" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/email"
         android:layout_width="354dp"
         android:layout_height="70dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Email"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName4"
+        android:id="@+id/password"
         android:layout_width="354dp"
         android:layout_height="70dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Password"
+        android:inputType="textPassword"
+        android:hint="Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723" />
+        app:layout_constraintVertical_bias="0.65" />
 
     <ImageButton
         android:id="@+id/back"
         android:layout_width="76dp"
         android:layout_height="56dp"
+        android:backgroundTint="#00BCD4"
         android:onClick="goback"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +71,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        app:srcCompat="@mipmap/iconlogin" />
+        app:layout_constraintVertical_bias="0.19"
+        app:srcCompat="@drawable/login_foreground" />
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="@string/forgot_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/blogin"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732" />
+    <!--app:srcCompat="@mipmap/iconlogin"--> />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

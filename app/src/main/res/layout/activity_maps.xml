@@ -11,6 +11,7 @@
     android:orientation="vertical">
 
     <include layout="@layout/toolbar"/>
+    <!--<include layout="@menu/main_menu"/>-->
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -20,8 +21,9 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".MapsActivity"
-            tools:layout="@layout/activity_maps" />
+            tools:context=".MapsActivity"/>
+            <!--tools:layout="@layout/activity_maps"-->
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
