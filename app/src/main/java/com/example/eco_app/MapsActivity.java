@@ -15,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.eco_app.databinding.ActivityMapsBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -79,5 +80,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void launchRecordActivity(MenuItem item) {
         Intent intent = new Intent(MapsActivity.this,viewRecord.class);
         startActivity(intent);
+    }
+
+    public void goToLogin() {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+
+    public void logout(MenuItem item) {
+        FirebaseAuth.getInstance().signOut();
+        goToLogin();
     }
 }

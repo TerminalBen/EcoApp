@@ -33,4 +33,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="forgot_password">"Forgot Password?"</string>
+    <string name="resetpwd">Reset your Password!</string>
+    <string name="prompt_email_reset">Enter Your Email Address!</string>
+    <string name="resetpwd_btn">Reset Password</string>
 </resources>

@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
@@ -27,6 +29,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private Button login_btn;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private TextView forgot_pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         progressBar=findViewById(R.id.progressBar);
 
+        forgot_pwd = findViewById(R.id.forgotPassword);
+        forgot_pwd.setOnClickListener(this);
+
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -54,6 +60,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     public void goToApp() {
         Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void pwdReset() {
+        Intent intent = new Intent(this, ForgotPassword.class);
         startActivity(intent);
     }
 
@@ -70,7 +81,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             case R.id.forgotPassword:
                 //create method to reset the password
-                //pwReset();
+                pwdReset();
+                break;
         }
     }
 
@@ -108,7 +120,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    goToApp();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    if(user.isEmailVerified()){
+                        goToApp();
+                    }
+                    //goToApp()
+                    else{
+                        user.sendEmailVerification();
+                        Toast.makeText(Login.this, "check your email Address for verification!", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
                     Toast.makeText(Login.this, "Failed to login! Please check your Credentials", Toast.LENGTH_LONG).show();
