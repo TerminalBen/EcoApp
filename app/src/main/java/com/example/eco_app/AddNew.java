@@ -6,8 +6,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URI;
@@ -27,6 +31,8 @@ public class AddNew extends AppCompatActivity {
     private static final int IMAGE_CAPTURE_CODE = 1001;
     ImageView camera;
     Uri image_uri;
+    TextView latitudeText;
+    TextView longitudeText;
 
 
     @Override
@@ -40,9 +46,15 @@ public class AddNew extends AppCompatActivity {
         mtoolbar = findViewById(R.id.toolbar_add);
         setSupportActionBar(mtoolbar);
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        final double[] Latitude = new double[1];
+        final double[] Longitude = new double[1];
 
+        final String[] latStr = new String[1];
+        final String[] longStr = new String[1];
 
         camera= findViewById(R.id.camera_button);
+        latitudeText = findViewById(R.id.lat);
+        longitudeText = findViewById(R.id.longi);
 
         camera.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -63,11 +75,32 @@ public class AddNew extends AppCompatActivity {
                     // system < marshmellow
                     openCamera();
                 }
+            /*
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            // get the last know location from your location manager.
+            Location location= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            // now get the lat/lon from the location and do something with it.
+            //setLocationText(location.getLatitude(), location.getLongitude());
+            Latitude[0] = location.getLatitude();
+            Longitude[0] = location.getLongitude();
+            latStr[0] = Double.toString(Latitude[0]);
+            longStr[0] = Double.toString(Longitude[0]);
+
+            Log.i("Latitude: ", latStr[0]);
+            Log.i("Longitude: ", longStr[0]);
+            */
           }
       });
 
 
     }
+    /*
+    private void setLocationText(Double a,Double b){
+        latitudeText.setText(Double.toString(a));
+        longitudeText.setText(Double.toString(b));
+    }
+
+     */
 
     private void openCamera() {
         ContentValues values = new ContentValues();

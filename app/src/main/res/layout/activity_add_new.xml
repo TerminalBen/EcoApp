@@ -6,24 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".AddNew">
 
+    <TextView
+        android:id="@+id/longi"
+        android:layout_width="200dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/Logitude"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lat" />
+
     <include
         android:id="@+id/toolbar_add"
         layout="@layout/toolbar"
-        android:backgroundTint="#FF8800" />
+        android:backgroundTint="#FF8800"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="40dp" />
 
     <ImageView
         android:id="@+id/camera_button"
         android:layout_width="203dp"
         android:layout_height="196dp"
         android:contentDescription="@string/camera_button"
+        android:onClick="openCamera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_add"
-        app:layout_constraintVertical_bias="0.108"
-        app:srcCompat="@drawable/ic_camera"
-        android:onClick="openCamera"
-        />
+        app:layout_constraintVertical_bias="0.083"
+        app:srcCompat="@drawable/ic_camera" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -33,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera_button"
-        app:layout_constraintVertical_bias="0.54">
+        app:layout_constraintVertical_bias="0.392">
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -44,10 +57,9 @@
         android:layout_marginBottom="188dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/camera_button"
-        app:layout_constraintVertical_bias="0.932">
+        app:layout_constraintVertical_bias="0.597">
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -60,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        app:layout_constraintVertical_bias="0.431"
+        app:layout_constraintVertical_bias="0.747"
         app:srcCompat="@drawable/ic_submit" />
 
     <com.google.android.material.textfield.TextInputEditText
@@ -84,5 +96,17 @@
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
+
+    <TextView
+        android:id="@+id/lat"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/Latitude"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
