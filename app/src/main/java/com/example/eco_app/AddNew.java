@@ -3,6 +3,7 @@ package com.example.eco_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -26,13 +27,15 @@ import java.net.URI;
 import java.util.Objects;
 
 public class AddNew extends AppCompatActivity {
-    private Toolbar  mtoolbar;
+    private Toolbar mtoolbar;
     private static final int PERMISSION_CODE = 1000;
     private static final int IMAGE_CAPTURE_CODE = 1001;
     ImageView camera;
     Uri image_uri;
     TextView latitudeText;
     TextView longitudeText;
+    private double Latitude;
+    private double Longitude;
 
 
     @Override
@@ -40,67 +43,78 @@ public class AddNew extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new);
 
-        mtoolbar=findViewById(R.id.toolbar_add);
+        mtoolbar = findViewById(R.id.toolbar_add);
         setSupportActionBar(mtoolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mtoolbar = findViewById(R.id.toolbar_add);
         setSupportActionBar(mtoolbar);
         //Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        final double[] Latitude = new double[1];
-        final double[] Longitude = new double[1];
 
         final String[] latStr = new String[1];
         final String[] longStr = new String[1];
 
-        camera= findViewById(R.id.camera_button);
+        camera = findViewById(R.id.camera_button);
         latitudeText = findViewById(R.id.lat);
         longitudeText = findViewById(R.id.longi);
 
         camera.setOnClickListener(new View.OnClickListener() {
-        @Override
-          public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
-                        checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)== PackageManager.PERMISSION_DENIED)
-                    {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
+                            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                         String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permission,PERMISSION_CODE);
-                    }
-                    else{
+                        requestPermissions(permission, PERMISSION_CODE);
+                    } else {
                         // permission already granted
                         openCamera();
+                        getLocation();
+                        //setLocationText(Latitude,Longitude);
                     }
-                }
-                else{
+                } else {
                     // system < marshmellow
                     openCamera();
+                    getLocation();
+                    //setLocationText(Latitude,Longitude);
                 }
-            /*
-            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            // get the last know location from your location manager.
-            Location location= locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            // now get the lat/lon from the location and do something with it.
-            //setLocationText(location.getLatitude(), location.getLongitude());
-            Latitude[0] = location.getLatitude();
-            Longitude[0] = location.getLongitude();
-            latStr[0] = Double.toString(Latitude[0]);
-            longStr[0] = Double.toString(Longitude[0]);
-
-            Log.i("Latitude: ", latStr[0]);
-            Log.i("Longitude: ", longStr[0]);
-            */
-          }
-      });
+            }
+        });
 
 
     }
-    /*
+
+    private void getLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        // get the last know location from your location manager.
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Log.d("Location: ",String.valueOf(location));
+        // now get the lat/lon from the location and do something with it.
+        setLocationText(location.getLatitude(), location.getLongitude());
+        Latitude = location.getLatitude();
+        Longitude = location.getLongitude();
+        String latStr = Double.toString(Latitude);
+        String longStr = Double.toString(Longitude);
+        Log.d("Latitude: ", latStr);
+        Log.d("Longitude: ", longStr);
+    }
+
     private void setLocationText(Double a,Double b){
         latitudeText.setText(Double.toString(a));
         longitudeText.setText(Double.toString(b));
     }
 
-     */
+
 
     private void openCamera() {
         ContentValues values = new ContentValues();
