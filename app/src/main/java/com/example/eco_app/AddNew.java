@@ -137,8 +137,21 @@ public class AddNew extends AppCompatActivity {
                     requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},44);
                 }
 
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                Log.d("Location: ",String.valueOf(location));
+                FusedLocationProviderClient location = LocationServices.getFusedLocationProviderClient(AddNew.this);
+                Task<Location> task = location.getLastLocation();
+                task.addOnSuccessListener(new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(@NonNull Location location) {
+                        if(location != null){
+                            Location current_location = location;
+                            setLocationText(current_location.getLatitude(),
+                                    current_location.getLongitude());
+                        }
+                    }
+                });
+
+                /**
+                 * Log.d("Location: ",String.valueOf(location));
                 // now get the lat/lon from the location and do something with it.
                 setLocationText(location.getLatitude(), location.getLongitude());
                 Latitude = location.getLatitude();
@@ -148,6 +161,7 @@ public class AddNew extends AppCompatActivity {
                 Log.d("Latitude: ", latStr);
                 Log.d("Longitude: ", longStr);
                 setLocationText(Latitude,Longitude);
+                 */
             }
         });
         choce_dialog = new Dialog( AddNew.this);
@@ -296,13 +310,10 @@ public class AddNew extends AppCompatActivity {
         }
     }
 
-
-    private void setLocationText(Double a,Double b){
-        latitudeText.setText(Double.toString(a));
-        longitudeText.setText(Double.toString(b));
+    private void setLocationText(double a, double b){
+        latitudeText.setText(String.valueOf(a));
+        longitudeText.setText(String.valueOf(b));
     }
-
-
 
     private void openCamera() {
         ContentValues values = new ContentValues();
@@ -359,6 +370,4 @@ public class AddNew extends AppCompatActivity {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
-
-
 }

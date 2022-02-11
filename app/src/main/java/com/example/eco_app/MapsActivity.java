@@ -1,9 +1,11 @@
 package com.example.eco_app;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +37,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private GoogleMap mMap;
     DatabaseReference dbref;
+    private SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.google_maps);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
@@ -109,6 +112,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     public void lauchAddActivity(View view) {
         Intent intent = new Intent(MapsActivity.this,AddNew.class);
@@ -127,6 +134,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void logout(MenuItem item) {
         FirebaseAuth.getInstance().signOut();
+        SharedPreferences shared = this.getSharedPreferences(
+                "application", this.MODE_PRIVATE
+        );
+        SharedPreferences.Editor editor = shared.edit();
+        editor.remove("user_mail").commit();
+        editor.remove("is_logged").commit();
+        editor.apply();
         goToLogin();
     }
 

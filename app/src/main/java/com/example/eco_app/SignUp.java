@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -24,6 +25,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     private EditText userName, email,password;
     private ProgressBar progressbar;
+    private boolean is_logged;
+    private SharedPreferences shared;
+    private String user_mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,29 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         signup.setOnClickListener((View.OnClickListener) this);
 
         mAuth = FirebaseAuth.getInstance();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        shared = this.getSharedPreferences(
+                "application", this.MODE_PRIVATE
+        );
+
+        getAppPreferences();
+        if(is_logged){
+            goToApp();
+        }
+    }
+
+    private void getAppPreferences() {
+        user_mail = shared.getString("user_mail", "");
+        is_logged = shared.getBoolean("is_logged", false);
+    }
+
+    public void goToApp() {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
     }
 
     public void goToApp(View view) {

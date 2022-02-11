@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -30,6 +31,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private TextView forgot_pwd;
+    private SharedPreferences shared;
+    private String user_mail;
+    private boolean is_logged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +57,28 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
     }
 
+
     public void goBack() {
         Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
     }
 
     public void goToApp() {
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(Login.this, MapsActivity.class);
         startActivity(intent);
     }
 
     public void pwdReset() {
         Intent intent = new Intent(this, ForgotPassword.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        shared = this.getSharedPreferences(
+                "application", this.MODE_PRIVATE
+        );
     }
 
 
@@ -122,6 +135,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 if (task.isSuccessful()){
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     if(user.isEmailVerified()){
+                        saveInfoOnSharePreferencies(user.getEmail());
                         goToApp();
                     }
                     //goToApp()
@@ -136,5 +150,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 }
             }
         });
+    }
+
+    public void saveInfoOnSharePreferencies(String email){
+
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putString("user_mail", email);
+        editor.putBoolean("is_logged", true);
+        editor.apply();
+        editor.commit();
     }
 }

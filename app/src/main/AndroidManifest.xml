@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.eco_app">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -21,6 +22,11 @@
 
         android:supportsRtl="true"
         android:theme="@style/Theme.Eco_App">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/api_key"
+            android:debuggable="false"
+            tools:ignore="HardcodedDebugMode" />
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
@@ -62,9 +68,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
         <!--
         <activity
             android:name=".MapsActivity"
