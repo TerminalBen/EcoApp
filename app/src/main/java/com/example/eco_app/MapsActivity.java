@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,8 +18,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.eco_app.databinding.ActivityMapsBinding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -31,9 +34,11 @@ import java.util.List;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    DatabaseReference dbref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        dbref = FirebaseDatabase.getInstance().getReference().child("Data");
         super.onCreate(savedInstanceState);
         @NonNull ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -78,31 +83,30 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        FirebaseDatabase.getInstance().getReference().child("Data").addValueEventListener(new ValueEventListener() {
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                List<Double> latitudes = new ArrayList<>(Arrays.asList());
-                List<Double> longitudes = new ArrayList<>(Arrays.asList());
-
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    double latt = (double) snapshot.child("latitude").getValue();
-                    double longg = (double) snapshot.child("longitude").getValue();
-                    //store this data in list
-                    latitudes.add(latt);
-                    longitudes.add(longg);
-                }
-                for(int i=0;i<longitudes.size();i++){
-                    LatLng newLocation = new LatLng(latitudes.get(i), longitudes.get(i));
-                    mMap.addMarker(new MarkerOptions()
-                            .position(newLocation));
-                }
-            }
+        dbref.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                return;
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                LatLng newLocation = new LatLng(
+                        dataSnapshot.child("latitude").getValue(Long.class),
+                        dataSnapshot.child("longitude").getValue(Long.class)
+                );
+                mMap.addMarker(new MarkerOptions()
+                        .position(newLocation)
+                        .title(dataSnapshot.child("name").getValue(String.class)));
             }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
         });
-
-
     }
 
 
@@ -124,6 +128,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void logout(MenuItem item) {
         FirebaseAuth.getInstance().signOut();
         goToLogin();
+    }
+
+    public void goToAddNew() {
+        Intent intent = new Intent(this, AddNew.class);
+        startActivity(intent);
     }
 
 
