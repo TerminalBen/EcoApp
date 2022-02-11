@@ -37,7 +37,7 @@
     <string name="prompt_email_reset">Enter Your Email Address!</string>
     <string name="resetpwd_btn">Reset Password</string>
     <string name="Latitude">Latitude</string>
-    <string name="Logitude">Longitude</string>
+    <string name="Longitude">Longitude</string>
     <string name="Locate">Locate</string>
 
 </resources>

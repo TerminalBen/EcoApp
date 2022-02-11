@@ -6,12 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".AddNew">
 
-    <TextView
+    <EditText
         android:id="@+id/longi"
         android:layout_width="200dp"
         android:layout_height="34dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/Logitude"
+        android:layout_marginTop="30dp"
+        android:paddingTop="5dp"
+        android:inputType="numberDecimal"
+        android:hint="Longitude"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.701"
@@ -97,12 +99,13 @@
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
-    <TextView
+    <EditText
         android:id="@+id/lat"
         android:layout_width="200dp"
         android:layout_height="39dp"
+        android:inputType="numberDecimal"
         android:layout_marginTop="28dp"
-        android:text="@string/Latitude"
+        android:hint="Latitude"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.701"
@@ -113,7 +116,7 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="469dp"
+        android:layout_marginTop="479dp"
         android:background="#454040"
         android:text="@string/Locate"
         app:layout_constraintBottom_toBottomOf="parent"

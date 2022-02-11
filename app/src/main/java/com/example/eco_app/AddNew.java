@@ -1,5 +1,8 @@
 package com.example.eco_app;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +26,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,10 +50,11 @@ public class AddNew extends AppCompatActivity {
     private static final int IMAGE_CAPTURE_CODE = 1001;
     ImageView camera;
     Uri image_uri;
-    TextView latitudeText;
-    TextView longitudeText;
+    EditText latitudeText;
+    EditText longitudeText;
     private double Latitude;
     private double Longitude;
+    private Dialog choce_dialog;
     FusedLocationProviderClient fusedLocationProviderClient;
     Button locate_btn;
     @Override
@@ -75,24 +82,7 @@ public class AddNew extends AppCompatActivity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
-                            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permission, PERMISSION_CODE);
-                    } else {
-                        // permission already granted
-                        openCamera();
-                        //getLocation();
-
-                        //setLocationText(Latitude,Longitude);
-                    }
-                } else {
-                    // system < marshmellow
-                    openCamera();
-                    //getLocation();
-                    //setLocationText(Latitude,Longitude);
-                }
+                choce_dialog.show();
             }
         });
 
@@ -128,8 +118,77 @@ public class AddNew extends AppCompatActivity {
                 setLocationText(Latitude,Longitude);
             }
         });
+        choce_dialog = new Dialog( AddNew.this);
+        choce_dialog.setContentView(R.layout.photo_method);
+        choce_dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.dialog_bg));
+        choce_dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        choce_dialog.setCancelable(true);
 
+        Button from_camera = (Button) choce_dialog.findViewById(R.id.use_camera);
+        Button from_gallery = (Button) choce_dialog.findViewById(R.id.use_galery);
+        from_camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                useCamera();
+                choce_dialog.hide();
+            }
+        });
 
+        from_gallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mGetcontent.launch("image/*");
+                choce_dialog.hide();
+            }
+        });
+
+    }
+
+    ActivityResultLauncher<String> mGetcontent = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+                    if(result != null){
+                        camera.setImageURI(result);
+                    }
+                }
+            });
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    public void useGallery(){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 3);
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+    }
+
+    public void useCamera(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
+                    checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                String[] permission = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permission, PERMISSION_CODE);
+            } else {
+                // permission already granted
+                openCamera();
+                //getLocation();
+
+                //setLocationText(Latitude,Longitude);
+            }
+        } else {
+            // system < marshmellow
+            openCamera();
+            //getLocation();
+            //setLocationText(Latitude,Longitude);
+        }
     }
     /*
     private void getLocation() {
