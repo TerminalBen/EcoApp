@@ -1,5 +1,6 @@
 package com.example.eco_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
@@ -22,17 +23,17 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ActivityMapsBinding binding;
-    private Toolbar mtoolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        //MAP BUG IS HERE. iF I COMMENT THESE 3 LINES THE BUG IS GONE.
+        //@NonNull ActivityMapsBinding binding = ActivityMapsBinding.inflate(getLayoutInflater());
         //setContentView(binding.getRoot());
-        setContentView(R.layout.activity_maps);
+        //setContentView(R.layout.activity_maps);
 
-        mtoolbar=findViewById(R.id.toolbar);
+        //private ActivityMapsBinding binding;
+        Toolbar mtoolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mtoolbar);
 
 
@@ -69,6 +70,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
     }
 
 
@@ -91,4 +94,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         FirebaseAuth.getInstance().signOut();
         goToLogin();
     }
+
+
+
 }

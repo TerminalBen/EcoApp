@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,6 +42,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -224,11 +226,11 @@ public class AddNew extends AppCompatActivity {
         data.setLatitude(lat);
 
         double lon = Double.parseDouble(longitudeText.getText().toString().trim());
-        data.setLatitude(lon);
+        data.setLongitude(lon);
 
         dbref.push().setValue(data);
 
-        pd.setTitle("---Uploading---");
+        pd.setTitle("Uploading...");
         pd.show();
         final String randomKey = UUID.randomUUID().toString();
         // Create a reference to "mountains.jpg"
@@ -240,8 +242,8 @@ public class AddNew extends AppCompatActivity {
                     @Override
                     public void onSuccess(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
-                        Snackbar.make(findViewById(R.id.content),"image Uploaded",Snackbar.LENGTH_LONG).show();
-                        //Toast.makeText(getApplicationContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
+                        //Snackbar.make(findViewById(R.id.content),"image Uploaded",Snackbar.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Image uploaded", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -346,6 +348,16 @@ public class AddNew extends AppCompatActivity {
             //upload();
         }
 
+    }
+
+    public void logout(MenuItem item) {
+        FirebaseAuth.getInstance().signOut();
+        goToLogin();
+    }
+
+    public void goToLogin() {
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 
 
